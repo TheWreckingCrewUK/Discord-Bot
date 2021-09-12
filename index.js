@@ -112,6 +112,9 @@ client.on("guildMemberAdd", (member) => {
 	const channel = client.channels.cache.get('525996718345551872');
 	channel.send(`<@&371662934335815680> ${member.user} has joined`);
 	
+	var role = member.guild.roles.cache.find(role => role.name === "New Arrivals");
+	member.roles.add(role);
+	
 	var post = {user_id: member.id, event_id: 0};
 	connection.query('INSERT INTO discord_user_history SET ?', post, function (error, results, fields) {
 		if (error) { console.error(error); };
